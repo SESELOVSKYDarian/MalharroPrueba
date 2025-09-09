@@ -1,0 +1,177 @@
+footer{
+    background-color: #181616;
+
+}
+
+/*EMPIEZA BOTÓN SUBIR*/
+html{
+    scroll-behavior: smooth;
+}
+.ir-arriba {
+  position: right;
+  bottom: 24px;
+  right: 24px;
+  width: auto;
+  height: auto;
+  display: flex;
+  align-items:right;
+  justify-content:right;
+  text-decoration: none;
+  transition: opacity 0.2s, transform 0.2s;
+}
+.ir-arriba:hover {
+  transform: translateY(-4px);
+}
+.ir-arriba img {
+  width: auto;
+  height: auto;
+  pointer-events: none; /* ensure the anchor receives the click */
+}
+/*TERMINA BOTÓN SUBIR*/
+
+
+.frase{
+        color: #fff;
+  font-size: 40px;
+  font-family: Inter;
+  font-weight: 700;
+  line-height: 43.04px;
+  word-wrap: break-word;
+}
+
+
+/*Empieza logo-campus-link*/
+.campus-link{
+    color: white;
+    font-size: 17.71px;
+    font-family: Inter;
+    font-weight: 700;
+    line-height: 46.06px;
+    word-wrap: break-word;
+    text-decoration: none;
+}
+.logo-campus-link{
+  display: flex;
+  align-items: center;
+}
+.logo-campus-link .logo {
+  width: auto;
+  height: auto;
+  margin-right: 80px;
+  margin-left: 12px;
+}
+.logo-campus-link .campus-link:hover {
+  text-decoration: underline;
+  transform: scale(1.1);
+}
+/*Termina logo-campus-link*/
+
+
+.atajos-footer{
+    color: white;
+    font-size: 16px;
+    font-family: Inter;
+    font-weight: 400;
+    line-height: 20px;
+    word-wrap: break-word;
+    gap: 56px; 
+    text-decoration:none;
+}
+.atajos-footer a{
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid transparent;
+  border-radius: 8px;
+  text-decoration: none;
+  transition: background-color 0.2s, border-color 0.2s;
+}
+.atajos-footer:hover {
+  text-decoration: underline;
+}
+
+.direccion{
+    color: #C1C1C1;
+    font-size: 12px;
+    font-family: Inter;
+    font-weight: 600;
+    line-height: 32px;
+    word-wrap: break-word
+}
+
+
+
+/*Empieza Botones-redes*/
+.botones-redes {
+  display: flex;
+  gap: 16px;              /* space between buttons */
+  justify-content: left; /* center the row */
+  align-items: left;
+  margin: 2rem 0;
+}
+.botones-redes a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid transparent;
+  border-radius: 8px;
+  text-decoration: none;
+  transition: background-color 0.2s, border-color 0.2s;
+  padding-left: 20px; /* opcional: espacio interno */
+}
+
+.botones-redes a:hover {
+  transform: scale(1.1);
+}
+.botones-redes a:focus {
+  outline: none;
+  border-color: #018D8C;
+  box-shadow: 0 0 0 3px rgba(0, 86, 179, 0.3);
+}
+.botones-redes img {
+  width: 50px;       /* tamaño real del SVG */
+  height: auto;
+  pointer-events: none;
+}
+/*Termina Botones-redes*/
+
+
+
+/*Empieza Logos Educación*/
+.rect-container{
+  position: relative;
+  width:400px;
+  height: 60px;
+  background-color: white;
+  margin: 3rem 0; /* Elimina el centrado horizontal */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  display: flex; /* Esto activa align-items y justify-content */
+  align-items: center;
+  justify-content: flex-start;
+  gap: 30px;
+}
+.rect-container img {
+  position: absolute;
+  width: auto;
+  height: auto;
+}
+.svg-left {
+  top: 50%;
+  left: 20px;
+  transform: translateY(-50%);
+}
+.svg-right {
+  top: 50%;
+  right: 30px;
+  transform: translateY(-50%);
+}
+/*Termina Logos Educación*/
+
+
+.textofooter{
+    color: white;
+    font-size: 13px;
+    font-family: Inter;
+    font-weight: 400;
+    word-wrap: break-word
+}

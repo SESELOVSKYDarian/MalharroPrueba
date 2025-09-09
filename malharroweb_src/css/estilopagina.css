@@ -1,0 +1,105 @@
+/* 🔹 Tamaño uniforme para todas las imágenes */
+.banner-img {
+  height: 500px;          /* Alto fijo del banner */
+  object-fit: cover;      /* Recorta sin deformar */
+}
+
+/* 🔹 Indicadores personalizados */
+.carousel-indicators [data-bs-target] {
+  width: 20px;
+  height: 20px;
+  background: none !important; /* Quitamos fondo de Bootstrap */
+  border: none;
+  margin: 0 5px;
+}
+
+/* Triángulo */
+.indicador-triangulo::before {
+  content: "";
+  display: block;
+  width: 0;
+  height: 0;
+  margin: auto;
+  border-left: 8px solid transparent;
+  border-right: 8px solid transparent;
+  border-bottom: 12px solid white;
+}
+
+/* Círculo */
+.indicador-circulo::before {
+  content: "";
+  display: block;
+  width: 12px;
+  height: 12px;
+  margin: auto;
+  border-radius: 50%;
+  background: white;
+}
+
+/* Cuadrado */
+.indicador-cuadrado::before {
+  content: "";
+  display: block;
+  width: 12px;
+  height: 12px;
+  margin: auto;
+  background: white;
+  border-radius: 0; /* 🔹 Asegura que sea cuadrado */
+}
+
+/* 🔹 Estado activo (resaltado en negro) */
+.carousel-indicators .active.indicador-triangulo::before {
+  border-bottom-color: black;
+}
+.carousel-indicators .active.indicador-circulo::before,
+.carousel-indicators .active.indicador-cuadrado::before {
+  background: black;
+}
+
+/* 🔹 Texto con sombra para mejor contraste */
+.text-shadow {
+  text-shadow: 2px 2px 5px rgba(0,0,0,0.7);
+}
+
+/* 🔹 Contenedor de los botones */
+.botones-grid {
+  text-align: center;
+}
+
+/* 🔹 Estilo base para todos los botones */
+.btn-bloque {
+  display: block;
+  padding: 15px;
+  border-radius: 15px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: white;
+  text-decoration: none;
+  transition: transform 0.2s, opacity 0.2s;
+}
+
+/* Efecto hover */
+.btn-bloque:hover {
+  transform: scale(1.05);
+  opacity: 0.9;
+}
+
+/* 🔹 Colores individuales */
+.btn-carreras {
+  background-color: #ff6b6b; /* Rojo coral */
+}
+.btn-campus {
+  background-color: #4dabf7; /* Azul */
+}
+.btn-agenda {
+  background-color: #51cf66; /* Verde */
+}
+.btn-estudiantes {
+  background-color: #f59f00; /* Naranja */
+}
+.btn-institucional {
+  background-color: #845ef7; /* Violeta */
+}
+.btn-talleres {
+  background-color: #20c997; /* Verde azulado */
+}
