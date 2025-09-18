@@ -35,9 +35,10 @@ export const Texto = ({ textoID }) => {
             setStatus('loading');
             try {
                 const result = await getTextoByTextoId(textoID);
-                if (result) {
-                    setTexto(result);
-                    setEditedText(result);
+                if (result && typeof result === 'object' && 'contenido' in result) {
+                    const contenido = result.contenido ?? '';
+                    setTexto(contenido);
+                    setEditedText(contenido);
                     setStatus('success');
                 } else {
                     setStatus('error');
@@ -72,9 +73,10 @@ export const Texto = ({ textoID }) => {
 
             // Recarga el contenido actualizado desde el servidor
             const result = await getTextoByTextoId(textoID);
-            if (result) {
-                setTexto(result);
-                setEditedText(result);
+            if (result && typeof result === 'object' && 'contenido' in result) {
+                const contenido = result.contenido ?? '';
+                setTexto(contenido);
+                setEditedText(contenido);
             }
 
             setIsEditing(false); // Cierra modo edición

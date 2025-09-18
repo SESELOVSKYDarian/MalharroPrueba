@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from 'react';
 import { API_URL } from "@/app/config";
+import { normalizeStrapiData, toAbsoluteURL } from "@/app/lib/api";
 import Slider from 'react-slick'; // Librería para carruseles
 import ReactMarkdown from 'react-markdown'; // Para renderizar texto con formato Markdown
 import { FaArrowLeft, FaArrowRight } from 'react-icons/fa'; // Íconos de flechas
@@ -40,7 +41,7 @@ export default function Agenda() {
         }
 
         const { data } = await res.json(); // Extrae los datos del JSON
-        setAgendas(data); // Almacena los datos en el estado
+        setAgendas(normalizeStrapiData(data)); // Almacena los datos en el estado
       } catch (err) {
         console.error("Error en getAgendas:", err);
       }
@@ -91,7 +92,10 @@ export default function Agenda() {
         <Slider ref={sliderRef} {...settings}>
           {agendas.map((item) => {
             const { id, tituloActividad, contenidoActividad, fecha, imagen } = item;
-            const imageUrl = imagen.url;
+            const imageUrl =
+              toAbsoluteURL(imagen?.url) ||
+              toAbsoluteURL(imagen?.formats?.medium?.url) ||
+              toAbsoluteURL(imagen?.formats?.thumbnail?.url);
 
             return (
               <div key={id} className="agenda-container">

@@ -6,6 +6,57 @@ export function toAbsoluteURL(path) {
   return `${base}${path}`;
 }
 
+function normalizeAttribute(value) {
+  if (!value) return value;
+
+  if (Array.isArray(value)) {
+    return value.map((item) => normalizeAttribute(item));
+  }
+
+  if (value && typeof value === 'object') {
+    if ('data' in value) {
+      if (Array.isArray(value.data)) {
+        return value.data.map((item) => normalizeStrapiEntity(item));
+      }
+
+      if (value.data === null) {
+        return null;
+      }
+
+      if (value.data) {
+        return normalizeStrapiEntity(value.data);
+      }
+    }
+  }
+
+  return value;
+}
+
+function normalizeStrapiEntity(entity) {
+  if (!entity || typeof entity !== 'object') return entity;
+
+  const { id, attributes } = entity;
+  if (!attributes) return entity;
+
+  const normalized = { id };
+
+  for (const [key, val] of Object.entries(attributes)) {
+    normalized[key] = normalizeAttribute(val);
+  }
+
+  return normalized;
+}
+
+export function normalizeStrapiData(data) {
+  if (!data) return data;
+
+  if (Array.isArray(data)) {
+    return data.map((item) => normalizeStrapiEntity(item));
+  }
+
+  return normalizeStrapiEntity(data);
+}
+
 export async function apiFetch(path, options = {}) {
   const base = process.env.NEXT_PUBLIC_API_URL || '';
   const jwt = typeof window !== 'undefined' ? localStorage.getItem('jwt') : null;

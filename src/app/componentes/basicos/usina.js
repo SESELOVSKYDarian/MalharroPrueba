@@ -1,4 +1,5 @@
 import { API_URL } from "@/app/config";
+import { normalizeStrapiData, toAbsoluteURL } from "@/app/lib/api";
 
 async function getUsinas() {
   try {
@@ -9,7 +10,7 @@ async function getUsinas() {
       return [];
     }
     const { data } = await res.json();
-    return data;
+    return normalizeStrapiData(data);
   } catch (err) {
     console.error("Error en getUsinas:", err);
     return [];
@@ -26,14 +27,22 @@ export default async function Usina() {
       ) : (
         usinas.map((item) => {
           const { id, nombre, carrera, link, imagen } = item;
-          const imageUrl = imagen?.url ?? '';
+          const imageUrl =
+            toAbsoluteURL(imagen?.url) ||
+            toAbsoluteURL(imagen?.formats?.medium?.url) ||
+            toAbsoluteURL(imagen?.formats?.thumbnail?.url) ||
+            '';
 
           return (
-            <div key={id} className="usina-card" style={{
-                  backgroundImage: `url(${imageUrl})`,
-                  backgroundSize: 'cover',
-                  backgroundPosition: 'center',
-                }}>
+            <div
+              key={id}
+              className="usina-card"
+              style={{
+                backgroundImage: imageUrl ? `url(${imageUrl})` : undefined,
+                backgroundSize: 'cover',
+                backgroundPosition: 'center',
+              }}
+            >
               <div className="usina-contenido">
                 <h2>{nombre}</h2>
                 <p>Carrera: {carrera}</p>

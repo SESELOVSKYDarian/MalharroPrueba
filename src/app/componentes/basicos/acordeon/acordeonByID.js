@@ -1,4 +1,5 @@
 import { API_URL } from "@/app/config";
+import { normalizeStrapiData } from "@/app/lib/api";
 
 // Obtiene los textos del acordeón según el ID proporcionado
 export async function getAcordeonByAcordeonID(acordeonID) {
@@ -11,12 +12,13 @@ export async function getAcordeonByAcordeonID(acordeonID) {
     }
 
     const { data } = await response.json();
+    const acordeones = normalizeStrapiData(data);
+    const acordeon = Array.isArray(acordeones) ? acordeones[0] : acordeones;
 
-    // Devuelve los textos del primer resultado (estructura esperada del backend)
-    return data[0].textos || null;
+    return Array.isArray(acordeon?.textos) ? acordeon.textos : [];
 
   } catch (error) {
     console.error('Error al obtener acordeon:', error);
-    return null; // Devuelve null en caso de error
+    return []; // Devuelve array vacío en caso de error
   }
 }
