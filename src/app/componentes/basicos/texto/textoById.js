@@ -1,4 +1,5 @@
 import { API_URL } from "@/app/config";
+import { normalizeStrapiData } from "@/app/lib/api";
 
 // Función que obtiene un texto desde la API a partir de su textoID
 export async function getTextoByTextoId(textoID) {
@@ -11,9 +12,10 @@ export async function getTextoByTextoId(textoID) {
     }
 
     const { data } = await res.json();
+    const textos = normalizeStrapiData(data);
+    const texto = Array.isArray(textos) ? textos[0] : textos;
 
-    // Devuelve el contenido del primer resultado si existe
-    return data[0]?.contenido || null;
+    return texto || null;
   } catch (err) {
     console.error("Error al obtener texto:", err);
     return null;

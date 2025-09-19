@@ -1,4 +1,5 @@
 import { API_URL } from "@/app/config";
+import { normalizeStrapiData, toAbsoluteURL } from "@/app/lib/api";
 
 // Obtiene la URL de una imagen a partir de su imagenID
 export async function getImagenbyImagenID(ImagenID) {
@@ -10,8 +11,15 @@ export async function getImagenbyImagenID(ImagenID) {
     }
     
     const { data } = await response.json();
+    const imagenes = normalizeStrapiData(data);
+    const imagen = Array.isArray(imagenes) ? imagenes[0]?.imagen : imagenes?.imagen;
 
-    return data[0].imagen.formats.thumbnail.url || null; // Devuelve la URL si existe
+    const url =
+      toAbsoluteURL(imagen?.formats?.thumbnail?.url) ||
+      toAbsoluteURL(imagen?.formats?.medium?.url) ||
+      toAbsoluteURL(imagen?.url);
+
+    return url || null; // Devuelve la URL si existe
   } catch (error) {
     console.error('Error al obtener la imagen:', error);
     return null; // En caso de error devuelve null
