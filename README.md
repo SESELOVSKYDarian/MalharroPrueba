@@ -64,6 +64,8 @@ Este repositorio contiene el front-end construido con Next.js y el nuevo stack d
    NEXT_PUBLIC_URL=http://localhost:3000
    ```
 
+   > El cliente intentará auto-descubrir el backend si dejaste el valor por defecto de Strapi (`http://localhost:1337/api`) o si tu servidor Express corre en `http://localhost:4000/api`. Aun así, se recomienda definir explícitamente la URL que estés utilizando para evitar redirecciones innecesarias.
+
 2. Instalá dependencias y levantá el servidor de desarrollo:
 
    ```bash
@@ -77,7 +79,7 @@ Este repositorio contiene el front-end construido con Next.js y el nuevo stack d
 
 ### ¿Cómo acceder?
 
-1. Asegurate de tener el backend corriendo en `http://localhost:4000` (ver sección [Configuración del backend](#configuración-del-backend)).
+1. Asegurate de tener el backend corriendo (por defecto escucha en `http://localhost:4000`, aunque también se aceptará `http://localhost:1337` si querés mantener la compatibilidad con Strapi).
 2. Levantá el frontend con `npm run dev` para servir Next.js en `http://localhost:3000`.
 3. Abrí tu navegador y visitá `http://localhost:3000/admin`.
 4. Iniciá sesión con el usuario administrador generado por el seed (`admin@malharro.edu.ar` / `admin123`, salvo que lo hayas modificado en el `.env`).
