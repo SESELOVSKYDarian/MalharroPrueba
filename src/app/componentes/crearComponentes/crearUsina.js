@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { API_URL } from "@/app/config";
+import { apiFetch, apiUpload } from "@/app/lib/api";
 
 export default function CrearUsina() {
   const [nombre, setNombre] = useState("");
@@ -20,35 +20,22 @@ export default function CrearUsina() {
     try {
       // Subir imagen
       const formData = new FormData();
-      formData.append("files", imagen);
+      formData.append("file", imagen);
 
-      const uploadRes = await fetch(`${API_URL}/upload`, {
+      const uploadData = await apiUpload(formData);
+      const mediaId = uploadData?.data?.id;
+
+      if (!mediaId) throw new Error("Error al subir la imagen.");
+
+      await apiFetch(`/usinas`, {
         method: "POST",
-        body: formData,
-      });
-
-      const uploadData = await uploadRes.json();
-      const imagenId = uploadData[0]?.id;
-
-      if (!imagenId) throw new Error("Error al subir la imagen.");
-
-      // Crear usina
-      const res = await fetch(`${API_URL}/usinas`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
         body: JSON.stringify({
-          data: {
-            nombre,
-            carrera,
-            link,
-            imagen: imagenId,
-          },
+          nombre,
+          carrera,
+          link,
+          mediaId,
         }),
       });
-
-      if (!res.ok) throw new Error("No se pudo crear la usina");
 
       // Limpiar formulario
       setNombre("");

@@ -1,14 +1,8 @@
-import { API_URL } from "@/app/config";
+import { apiFetch } from "@/app/lib/api";
 
 async function getUsinas() {
   try {
-    const res = await fetch(`${API_URL}/usinas?populate=imagen`);
-    
-    if (!res.ok) {
-      console.error("Error en fetch:", res.statusText);
-      return [];
-    }
-    const { data } = await res.json();
+    const { data } = await apiFetch(`/usinas`, { cache: "no-store" });
     return data;
   } catch (err) {
     console.error("Error en getUsinas:", err);

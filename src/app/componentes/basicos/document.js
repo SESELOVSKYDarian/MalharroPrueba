@@ -1,21 +1,13 @@
-import { API_URL } from "@/app/config";
+import { apiFetch } from "@/app/lib/api";
 
 export default async function Document() {
-  // Se extraen todos los documentos
-  const res = await fetch(`${API_URL}/documentos?populate=archivo`);
-
-  const { data: documentos } = await res.json();
+  const { data: documentos } = await apiFetch("/documentos", { cache: "no-store" });
 
   return (
     <div className="documento">
       {documentos.map((doc) => {
-        const attrs = doc.attributes || doc;
-        const titulo = attrs.titulo || 'Sin título';
-
-        // Para acceder a cada archivo se debe ir hacia la URL original de la api
-        const archivoUrl = attrs.archivo?.url
-          ? `${attrs.archivo.url}`
-          : null;
+        const titulo = doc.titulo || 'Sin título';
+        const archivoUrl = doc.archivo?.url ?? null;
 
         // Se renderizan todos los links a pdfs
         return (

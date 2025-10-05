@@ -4,17 +4,13 @@ import { getTextoByTextoId } from "./textoById";
 import { checkUserRole } from '../../validacion/checkRole';
 import ReactMarkdown from 'react-markdown';
 import { handleSave } from '../../validacion/handleSave';
-import { API_URL } from "@/app/config";
 
 export const Texto = ({ textoID }) => {
-    const jwt = typeof window !== "undefined" ? localStorage.getItem("jwt") : null;
-
     const [texto, setTexto] = useState(''); // Contenido original
     const [status, setStatus] = useState('idle'); // Estado de carga: 'idle', 'loading', 'success', 'error'
     const [isEditing, setIsEditing] = useState(false); // Indica si el usuario está editando
     const [editedText, setEditedText] = useState(''); // Contenido modificado
     const [isAdmin, setIsAdmin] = useState(false); // Rol de administrador
-    const [realID, setID] = useState('');
 
     useEffect(() => {
         // Verifica si el usuario es administrador
@@ -28,7 +24,7 @@ export const Texto = ({ textoID }) => {
         if (!textoID) {
             setStatus('error');
             return;
-        }        
+        }
 
         // Obtiene el texto desde el backend
         const fetchData = async () => {
@@ -46,28 +42,18 @@ export const Texto = ({ textoID }) => {
                 console.error('Fetch error:', error);
                 setStatus('error');
             }
-            const getRes = await fetch(`${API_URL}/textos?filters[textoID][$eq]=${textoID}`, {
-                headers: {
-                    'Authorization': `Bearer ${jwt}` // Agrega el token de autenticación
-                }
-            });
-            const getData = await getRes.json();
-            setID(getData.data[0].documentId);
 
         };
 
         fetchData();
-    }, [textoID, jwt]);
+    }, [textoID]);
 
     // Guarda los cambios realizados al texto
     const saveContent = async () => {
         try {
             await handleSave({
-                objetoAEditar: "texto",
-                idObjeto: realID,
-                nuevoContenido: editedText,
-                jwt,
-                campoAModificar: "contenido"
+                path: `/textos/${textoID}`,
+                payload: { contenido: editedText },
             });
 
             // Recarga el contenido actualizado desde el servidor
