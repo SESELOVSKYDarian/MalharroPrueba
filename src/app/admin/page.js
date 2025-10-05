@@ -170,7 +170,20 @@ export default function AdminPage() {
       })
       .catch((err) => {
         console.error(err);
-        setError("No fue posible validar tu sesión.");
+        if (err?.status === 401) {
+          localStorage.removeItem("jwt");
+          router.replace("/login");
+          return;
+        }
+        let friendly = "No fue posible validar tu sesión.";
+        if (err?.message === "Token inválido") {
+          friendly = "Tu sesión expiró. Iniciá sesión nuevamente.";
+        } else if (err?.message?.toLowerCase().includes("fetch")) {
+          friendly = "No pudimos conectarnos al servidor. Verificá que el backend esté en ejecución.";
+        } else if (err?.message) {
+          friendly = err.message;
+        }
+        setError(friendly);
       })
       .finally(() => setLoading(false));
   }, []); // eslint-disable-line react-hooks/exhaustive-deps

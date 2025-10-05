@@ -25,13 +25,17 @@ export async function apiFetch(path, options = {}) {
 
   if (!res.ok) {
     let message = `HTTP ${res.status}`;
+    let payload;
     try {
-      const data = await res.json();
-      message = data.error || message;
+      payload = await res.json();
+      message = payload.error || message;
     } catch {
-      // ignore
+      // ignore JSON parsing issues
     }
-    throw new Error(message);
+    const error = new Error(message);
+    error.status = res.status;
+    if (payload) error.payload = payload;
+    throw error;
   }
 
   if (res.status === 204) return null;
@@ -50,11 +54,15 @@ export async function apiUpload(formData) {
 
   if (!res.ok) {
     let message = `HTTP ${res.status}`;
+    let payload;
     try {
-      const data = await res.json();
-      message = data.error || message;
+      payload = await res.json();
+      message = payload.error || message;
     } catch {}
-    throw new Error(message);
+    const error = new Error(message);
+    error.status = res.status;
+    if (payload) error.payload = payload;
+    throw error;
   }
 
   return res.json();
