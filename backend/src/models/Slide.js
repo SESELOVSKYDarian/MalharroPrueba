@@ -36,10 +36,32 @@ Slide.init(
   },
 );
 
-Slide.belongsTo(Slider, { as: 'slider', foreignKey: { allowNull: false }, onDelete: 'CASCADE' });
-Slider.hasMany(Slide, { as: 'slides', foreignKey: { allowNull: false } });
+const sliderForeignKey = { name: 'sliderId', allowNull: false };
+Slide.belongsTo(Slider, {
+  as: 'slider',
+  foreignKey: sliderForeignKey,
+  onDelete: 'CASCADE',
+  onUpdate: 'CASCADE',
+});
+Slider.hasMany(Slide, {
+  as: 'slides',
+  foreignKey: sliderForeignKey,
+  onDelete: 'CASCADE',
+  onUpdate: 'CASCADE',
+});
 
-Slide.belongsTo(Media, { as: 'media', foreignKey: { allowNull: false }, onDelete: 'CASCADE' });
-Media.hasMany(Slide, { as: 'slides', foreignKey: { allowNull: false } });
+const mediaForeignKey = { name: 'mediaId', allowNull: false };
+Slide.belongsTo(Media, {
+  as: 'media',
+  foreignKey: mediaForeignKey,
+  onDelete: 'CASCADE',
+  onUpdate: 'CASCADE',
+});
+Media.hasMany(Slide, {
+  as: 'slides',
+  foreignKey: mediaForeignKey,
+  onDelete: 'CASCADE',
+  onUpdate: 'CASCADE',
+});
 
 export default Slide;

@@ -23,7 +23,18 @@ ImageAsset.init(
   },
 );
 
-ImageAsset.belongsTo(Media, { as: 'media', foreignKey: { allowNull: false }, onDelete: 'CASCADE' });
-Media.hasMany(ImageAsset, { as: 'imageAssets', foreignKey: { allowNull: false } });
+const mediaForeignKey = { name: 'mediaId', allowNull: false };
+ImageAsset.belongsTo(Media, {
+  as: 'media',
+  foreignKey: mediaForeignKey,
+  onDelete: 'CASCADE',
+  onUpdate: 'CASCADE',
+});
+Media.hasMany(ImageAsset, {
+  as: 'imageAssets',
+  foreignKey: mediaForeignKey,
+  onDelete: 'CASCADE',
+  onUpdate: 'CASCADE',
+});
 
 export default ImageAsset;

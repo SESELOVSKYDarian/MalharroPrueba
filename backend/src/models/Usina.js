@@ -26,7 +26,18 @@ Usina.init(
   },
 );
 
-Usina.belongsTo(Media, { as: 'media', foreignKey: { allowNull: false }, onDelete: 'SET NULL' });
-Media.hasMany(Usina, { as: 'usinas', foreignKey: { allowNull: false } });
+const mediaForeignKey = { name: 'mediaId', allowNull: true };
+Usina.belongsTo(Media, {
+  as: 'media',
+  foreignKey: mediaForeignKey,
+  onDelete: 'SET NULL',
+  onUpdate: 'CASCADE',
+});
+Media.hasMany(Usina, {
+  as: 'usinas',
+  foreignKey: mediaForeignKey,
+  onDelete: 'SET NULL',
+  onUpdate: 'CASCADE',
+});
 
 export default Usina;

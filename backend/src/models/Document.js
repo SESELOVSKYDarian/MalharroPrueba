@@ -22,7 +22,18 @@ Document.init(
   },
 );
 
-Document.belongsTo(Media, { as: 'media', foreignKey: { allowNull: false }, onDelete: 'CASCADE' });
-Media.hasMany(Document, { as: 'documents', foreignKey: { allowNull: false } });
+const mediaForeignKey = { name: 'mediaId', allowNull: false };
+Document.belongsTo(Media, {
+  as: 'media',
+  foreignKey: mediaForeignKey,
+  onDelete: 'CASCADE',
+  onUpdate: 'CASCADE',
+});
+Media.hasMany(Document, {
+  as: 'documents',
+  foreignKey: mediaForeignKey,
+  onDelete: 'CASCADE',
+  onUpdate: 'CASCADE',
+});
 
 export default Document;

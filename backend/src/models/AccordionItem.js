@@ -31,7 +31,18 @@ AccordionItem.init(
   },
 );
 
-AccordionItem.belongsTo(Accordion, { as: 'accordion', foreignKey: { allowNull: false }, onDelete: 'CASCADE' });
-Accordion.hasMany(AccordionItem, { as: 'items', foreignKey: { allowNull: false } });
+const accordionForeignKey = { name: 'accordionId', allowNull: false };
+AccordionItem.belongsTo(Accordion, {
+  as: 'accordion',
+  foreignKey: accordionForeignKey,
+  onDelete: 'CASCADE',
+  onUpdate: 'CASCADE',
+});
+Accordion.hasMany(AccordionItem, {
+  as: 'items',
+  foreignKey: accordionForeignKey,
+  onDelete: 'CASCADE',
+  onUpdate: 'CASCADE',
+});
 
 export default AccordionItem;

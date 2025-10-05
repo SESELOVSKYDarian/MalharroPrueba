@@ -26,7 +26,18 @@ AgendaItem.init(
   },
 );
 
-AgendaItem.belongsTo(Media, { as: 'media', foreignKey: { allowNull: false }, onDelete: 'SET NULL' });
-Media.hasMany(AgendaItem, { as: 'agendaItems', foreignKey: { allowNull: false } });
+const mediaForeignKey = { name: 'mediaId', allowNull: true };
+AgendaItem.belongsTo(Media, {
+  as: 'media',
+  foreignKey: mediaForeignKey,
+  onDelete: 'SET NULL',
+  onUpdate: 'CASCADE',
+});
+Media.hasMany(AgendaItem, {
+  as: 'agendaItems',
+  foreignKey: mediaForeignKey,
+  onDelete: 'SET NULL',
+  onUpdate: 'CASCADE',
+});
 
 export default AgendaItem;
