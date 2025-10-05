@@ -1,0 +1,245 @@
+:root {
+  color-scheme: dark;
+}
+
+.admin-root {
+  min-height: 100vh;
+  background: radial-gradient(circle at top left, #ff0066 0%, #1b0025 30%, #070018 70%, #02010a 100%);
+  font-family: "Inter", sans-serif;
+  color: #ffffff;
+}
+
+.admin-root .btn-highlight {
+  background: linear-gradient(135deg, #ffef0f, #ff6a00);
+  border: none;
+  color: #0b0316;
+  font-weight: 600;
+  padding: 0.75rem 1.5rem;
+  border-radius: 999px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.admin-root .btn-highlight:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 0.75rem 1.5rem rgba(255, 120, 0, 0.25);
+  color: #0b0316;
+}
+
+.malharro-navbar {
+  background: rgba(3, 1, 18, 0.92);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.logo-lupa-box {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 16px;
+  padding: 0.75rem 1.25rem;
+}
+
+.botonlogo {
+  color: #ffffff;
+  letter-spacing: 0.1em;
+  text-decoration: none;
+}
+
+.bg-highlight {
+  background: linear-gradient(135deg, #ff0066, #ffef0f);
+}
+
+.menu-box-lg {
+  background: rgba(15, 8, 32, 0.95);
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.menu-box-lg .nav-link {
+  color: #ffffff;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+}
+
+.menu-box-lg .nav-link:hover,
+.menu-box-lg .dropdown-item:hover {
+  color: #ffef0f;
+}
+
+.menu-box-lg .dropdown-menu {
+  background: rgba(10, 5, 24, 0.95);
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 0.75rem;
+}
+
+.menu-box-lg .dropdown-item {
+  color: #ffffff;
+}
+
+.btn-close-menu {
+  background: transparent;
+  border: none;
+  color: #ffffff;
+  font-size: 1.75rem;
+  align-self: flex-end;
+}
+
+.admin-main {
+  max-width: 1400px;
+}
+
+.text-gradient {
+  background: linear-gradient(135deg, #ffef0f, #ff0066);
+  -webkit-background-clip: text;
+  color: transparent;
+}
+
+.section-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.section-tab {
+  background: rgba(12, 4, 29, 0.8);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  color: #ffffff;
+  border-radius: 999px;
+  padding: 0.6rem 1.4rem;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.section-tab:hover {
+  background: rgba(27, 9, 62, 0.85);
+}
+
+.section-tab.active {
+  background: linear-gradient(135deg, #ff0066, #ffef0f);
+  color: #120222;
+}
+
+.admin-section-card {
+  background: rgba(9, 3, 24, 0.85);
+  border-radius: 28px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 2.5rem;
+  box-shadow: 0 1.5rem 3rem rgba(4, 0, 30, 0.4);
+}
+
+.admin-form-card {
+  background: rgba(18, 6, 38, 0.8);
+  border-radius: 24px;
+  padding: 1.75rem;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.02);
+}
+
+.section-subtitle {
+  font-size: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  color: rgba(255, 255, 255, 0.6);
+  margin-bottom: 1.5rem;
+}
+
+.malharro-carousel .carousel-indicators button {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  border: none;
+  margin: 0 0.25rem;
+}
+
+.malharro-carousel .carousel-item {
+  position: relative;
+  border-radius: 24px;
+  overflow: hidden;
+}
+
+.banner-img {
+  height: 360px;
+  object-fit: cover;
+}
+
+.placeholder-banner {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px dashed rgba(255, 255, 255, 0.2);
+  border-radius: 24px;
+  height: 360px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.placeholder-banner.small {
+  height: 220px;
+}
+
+.admin-card.dark {
+  background: rgba(12, 4, 29, 0.85);
+  border-radius: 24px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 2rem;
+  box-shadow: 0 1rem 2.5rem rgba(6, 0, 25, 0.35);
+}
+
+.media-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  gap: 1rem;
+}
+
+.media-tile {
+  position: relative;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 16px;
+  padding: 0.5rem;
+  cursor: pointer;
+  transition: transform 0.2s ease, border 0.2s ease;
+  color: inherit;
+}
+
+.media-tile:hover {
+  transform: translateY(-4px);
+  border-color: rgba(255, 239, 15, 0.6);
+}
+
+.document-tile {
+  min-height: 120px;
+  width: 100%;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 12px;
+}
+
+.bg-dark-subtle {
+  background-color: rgba(255, 255, 255, 0.08) !important;
+  color: #ffffff !important;
+}
+
+.form-control,
+.form-select,
+textarea {
+  color: #ffffff !important;
+}
+
+.table-dark {
+  --bs-table-bg: rgba(15, 5, 38, 0.75);
+  --bs-table-striped-bg: rgba(20, 8, 50, 0.85);
+  --bs-table-hover-bg: rgba(36, 12, 70, 0.9);
+  color: rgba(255, 255, 255, 0.9);
+  border-color: rgba(255, 255, 255, 0.08);
+}
+
+@media (max-width: 991.98px) {
+  .admin-section-card,
+  .admin-card.dark {
+    padding: 1.75rem;
+  }
+
+  .banner-img,
+  .placeholder-banner {
+    height: 260px;
+  }
+}
