@@ -35,7 +35,20 @@ User.init(
   },
 );
 
-User.belongsTo(Role, { as: 'role', foreignKey: { allowNull: false }, onDelete: 'RESTRICT' });
-Role.hasMany(User, { as: 'users', foreignKey: { allowNull: false } });
+const foreignKey = { name: 'roleId', allowNull: false };
+
+User.belongsTo(Role, {
+  as: 'role',
+  foreignKey,
+  onDelete: 'RESTRICT',
+  onUpdate: 'CASCADE',
+});
+
+Role.hasMany(User, {
+  as: 'users',
+  foreignKey,
+  onDelete: 'CASCADE',
+  onUpdate: 'CASCADE',
+});
 
 export default User;
