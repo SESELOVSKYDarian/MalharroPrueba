@@ -75,16 +75,24 @@ Este repositorio contiene el front-end construido con Next.js y el nuevo stack d
 
 ## Panel administrativo
 
-- Ruta: `/admin`
-- Autenticación: ingresá con el usuario administrador generado por el seed (`admin@malharro.edu.ar` / `admin123`, salvo que lo modifiques).
-- Secciones disponibles:
-  - **Slider principal**: crear, editar y eliminar slides del hero.
-  - **Agenda**: gestionar eventos y sus imágenes.
-  - **Usina**: alta y edición de referentes con su imagen y link.
-  - **Documentos**: subir material descargable (PDF u otros archivos).
-  - **Textos**: modificar bloques de texto reutilizados en la home.
-  - **Acordeón de carreras**: administrar elementos desplegables.
-  - **Cargar archivos**: zona lateral para subir imágenes/PDF y obtener el ID asociado.
+### ¿Cómo acceder?
+
+1. Asegurate de tener el backend corriendo en `http://localhost:4000` (ver sección [Configuración del backend](#configuración-del-backend)).
+2. Levantá el frontend con `npm run dev` para servir Next.js en `http://localhost:3000`.
+3. Abrí tu navegador y visitá `http://localhost:3000/admin`.
+4. Iniciá sesión con el usuario administrador generado por el seed (`admin@malharro.edu.ar` / `admin123`, salvo que lo hayas modificado en el `.env`).
+
+> Si el seed no se ejecutó todavía, corré `cd backend && npm run seed` para crear el usuario administrador y los datos iniciales.
+
+### Secciones disponibles
+
+- **Slider principal**: crear, editar y eliminar slides del hero.
+- **Agenda**: gestionar eventos y sus imágenes.
+- **Usina**: alta y edición de referentes con su imagen y link.
+- **Documentos**: subir material descargable (PDF u otros archivos).
+- **Textos**: modificar bloques de texto reutilizados en la home.
+- **Acordeón de carreras**: administrar elementos desplegables.
+- **Cargar archivos**: zona lateral para subir imágenes/PDF y obtener el ID asociado.
 
 Todos los cambios se almacenan mediante el backend Express y se reflejan automáticamente en el frontend público.
 
