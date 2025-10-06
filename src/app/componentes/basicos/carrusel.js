@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
-import { API_URL } from '@/app/config';
+import { apiFetch } from '@/app/lib/api';
 import Slider from 'react-slick';
 import ReactMarkdown from 'react-markdown';
 import { FaArrowLeft, FaArrowRight } from 'react-icons/fa';
@@ -46,13 +46,11 @@ export default function Carrusel() {
 
   // Carga las imágenes del carrusel al montar el componente
   useEffect(() => {
-    fetch(`${API_URL}/carrusels?populate=carrusel`)
-      .then(res => res.json())
-      .then(data => {
-        const item = data.data?.[0];
-        if (item) {
-          setTitle(item.title); // Guarda el título
-          setImagenesCarrusel(item.carrusel ?? []); // Guarda las imágenes
+    apiFetch('/slider')
+      .then((data) => {
+        if (data?.data) {
+          setTitle(data.data.title || '');
+          setImagenesCarrusel(data.data.slides || []);
         }
       })
       .catch(err => console.error('Error al cargar imágenes:', err));
@@ -63,8 +61,7 @@ export default function Carrusel() {
       {/* Carrusel usando react-slick */}
       <Slider ref={sliderRef} {...settings}>
         {imagenesCarrusel.map((imagen, index) => {
-          // Obtiene la URL de la imagen (versión grande si existe)
-          const url = imagen.formats?.large?.url || imagen.url;
+          const url = imagen.image?.url || imagen.url || imagen.media?.url || '';
           return (
             <div key={`slide-${index}`} style={{ width: '100%' }}>
               <div

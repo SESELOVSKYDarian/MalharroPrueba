@@ -1,8 +1,7 @@
 "use client";
 import { useState } from "react";
 import Link from "next/link";
-import { API_URL } from "@/app/config";
-import LoginWithGoogle from "./loginWithGoogle";
+import { apiFetch } from "@/app/lib/api";
 import { toast } from "react-hot-toast";
 import { useRouter } from "next/navigation";
 
@@ -15,15 +14,10 @@ export default function LoginPage() {
     e.preventDefault();
 
     try {
-      const res = await fetch(`${API_URL}/auth/local`, {
+      const data = await apiFetch("/auth/login", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ identifier, password }),
       });
-
-      const data = await res.json();
-
-      if (!res.ok) throw new Error(data?.error?.message || "Login inválido");
 
       localStorage.setItem("jwt", data.jwt);
       toast.success(`Bienvenido, ${data.user.username}!`);
@@ -63,7 +57,6 @@ export default function LoginPage() {
           <button className="form-button">Ingresar</button>
         </form>
         <div className="buttons-container">
-          <LoginWithGoogle mode="login" />
           <Link href="/registrar/">
             <button className="return-button">Registrarse</button>
           </Link>

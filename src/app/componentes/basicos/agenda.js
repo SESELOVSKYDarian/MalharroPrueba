@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
-import { API_URL } from "@/app/config";
+import { apiFetch } from "@/app/lib/api";
 import Slider from 'react-slick'; // Librería para carruseles
 import ReactMarkdown from 'react-markdown'; // Para renderizar texto con formato Markdown
 import { FaArrowLeft, FaArrowRight } from 'react-icons/fa'; // Íconos de flechas
@@ -31,16 +31,8 @@ export default function Agenda() {
     async function fetchAgendas() {
       try {
         // Llama a la API de agendas incluyendo las imágenes
-        const res = await fetch(`${API_URL}/agendas?populate=imagen`, {
-          cache: "no-store", // Evita usar caché (siempre solicita datos nuevos)
-        });
-        if (!res.ok) {
-          console.error("Error en fetch:", res.statusText);
-          return;
-        }
-
-        const { data } = await res.json(); // Extrae los datos del JSON
-        setAgendas(data); // Almacena los datos en el estado
+        const { data } = await apiFetch(`/agendas`, { cache: "no-store" });
+        setAgendas(data);
       } catch (err) {
         console.error("Error en getAgendas:", err);
       }
@@ -91,7 +83,7 @@ export default function Agenda() {
         <Slider ref={sliderRef} {...settings}>
           {agendas.map((item) => {
             const { id, tituloActividad, contenidoActividad, fecha, imagen } = item;
-            const imageUrl = imagen.url;
+            const imageUrl = imagen?.url;
 
             return (
               <div key={id} className="agenda-container">

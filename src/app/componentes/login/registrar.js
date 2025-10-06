@@ -1,10 +1,9 @@
 "use client";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { API_URL } from "@/app/config";
+import { apiFetch } from "@/app/lib/api";
 import { toast } from "react-hot-toast";
 import Link from "next/link";
-import LoginWithGoogle from "./loginWithGoogle";
 
 export default function Register() {
   const [username, setUsername] = useState("");
@@ -40,21 +39,13 @@ export default function Register() {
     }
 
     try {
-      const res = await fetch(`${API_URL}/auth/local/register`, {
+      const data = await apiFetch("/auth/register", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ username, email, password }),
       });
 
-      const data = await res.json();
-
-      if (res.ok) {
-        // login automático y redirección
-        localStorage.setItem("jwt", data.jwt);
-        router.push("/"); 
-      } else {
-        toast.error(data?.error?.message || "Error en el registro.");
-      }
+      localStorage.setItem("jwt", data.jwt);
+      router.push("/");
     } catch (error) {
       console.error("Error:", error);
       toast.error("Hubo un error en el registro.");
@@ -107,10 +98,6 @@ export default function Register() {
             Registrarse
           </button>
         </form>
-
-        <div className="buttons-container" style={{ marginTop: 12 }}>
-          <LoginWithGoogle mode="register" />
-        </div>
 
         <div className="buttons-container">
           <Link href="/login/">
